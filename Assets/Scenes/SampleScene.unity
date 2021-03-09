@@ -121,6 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &92983291 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8783177350951296000, guid: 0ed54d95d5f63024ba655e5ef98e742c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1312528562}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87ecdf200a7f614f9b0e10aa53bb75a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,8 +234,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 718305541}
-  - component: {fileID: 718305540}
   - component: {fileID: 718305539}
+  - component: {fileID: 718305540}
   m_Layer: 0
   m_Name: GridRenderer
   m_TagString: Untagged
@@ -254,6 +266,9 @@ MonoBehaviour:
   - _gameObjectTemplate: {fileID: 8536558251042807784, guid: 756abe874bd6b3744ab0c95602058001,
       type: 3}
     _stateInGrid: 3
+  - _gameObjectTemplate: {fileID: 321438539965923022, guid: 260f138c41e840d40b82d113c6f47a65,
+      type: 3}
+    _stateInGrid: 0
   _gridSizeInLength: 10
   _timeAfterWhichBlockWillDelete: 0.3
 --- !u!114 &718305540
@@ -269,9 +284,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _comparisonWithResultOfBarrierPerlinNoise: 0.5
-  _comparisonWithResultOfSin: 2
-  _sinWaveWidth: 0.9
-  _comparisonWithResultOfCoinPerlinNoise: 0.4
+  _comparisonWithResultOfSin: 0.9
+  _sinWaveWidth: 2
+  _comparisonWithResultOfCoinPerlinNoise: 0.5
 --- !u!4 &718305541
 Transform:
   m_ObjectHideFlags: 0
@@ -297,6 +312,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -363,12 +379,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0.2, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93d0526e9cd1ed94db6fa7ede2610b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tracingBall: {fileID: 92983291}
+  _xOffset: 2.3
 --- !u!1001 &1312528562
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -376,6 +406,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7100023997723842685, guid: 0ed54d95d5f63024ba655e5ef98e742c,
+        type: 3}
+      propertyPath: _speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7100023997723842685, guid: 0ed54d95d5f63024ba655e5ef98e742c,
+        type: 3}
+      propertyPath: _jumpForce
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7392668492289982672, guid: 0ed54d95d5f63024ba655e5ef98e742c,
         type: 3}
       propertyPath: m_Name
