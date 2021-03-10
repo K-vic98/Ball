@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
     private int _score;
 
     public event UnityAction<int> ScoreChanged;
-    public event UnityAction PlayerDied;
 
     public void IncreaseScore()
     {
@@ -18,6 +18,6 @@ public class Ball : MonoBehaviour
 
     public void Die()
     {
-
+        SceneManager.LoadScene("MainMenu");
     }
 }
