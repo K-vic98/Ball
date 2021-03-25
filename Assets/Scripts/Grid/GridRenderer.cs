@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -47,20 +46,25 @@ public class GridRenderer : MonoBehaviour
 
         for (int i = 0; i < _gridSizeInLength; i++)
         {
-            Vector2Int OnGroundPosition = playerPositionOnGrid + new Vector2Int(i, 0);
-            Vector2Int GroundPosition = playerPositionOnGrid + new Vector2Int(i, -1);
-
-            StateInGrid onGroundState = _gridGenerator.GenerateStateAtTopOfGrid(OnGroundPosition.x);
-            StateInGrid groundState = StateInGrid.Ground;
-
-            GameObject onGroundGameObject = Instantiate(_templates.First(template => template.StateInGrid == onGroundState).GameObjectTemplate, TranslateGridToWorldPosition(OnGroundPosition), Quaternion.identity);
-            GameObject groundGameObject = Instantiate(_templates.First(template => template.StateInGrid == groundState).GameObjectTemplate, TranslateGridToWorldPosition(GroundPosition), Quaternion.identity);
-
-            _queueWithGameObjectsToDelete.Enqueue(onGroundGameObject);
-            _queueWithGameObjectsToDelete.Enqueue(groundGameObject);
+            DrawLineOfGrid(playerPositionOnGrid, i, 0);
+            DrawLineOfGrid(playerPositionOnGrid, i, -1);
         }
 
         _pointsWhereDoNotNeedToDrawGrid.Add(TranslateWorldToGridPosition(playerPosition).x);
+    }
+
+    private void DrawLineOfGrid(Vector2Int playerPositionOnGrid, int horizontalPosition, int verticalPosition)
+    {
+        Vector2Int gridPosition = playerPositionOnGrid + new Vector2Int(horizontalPosition, verticalPosition);
+        StateInGrid gridState = new StateInGrid();
+
+        if (verticalPosition == 0)
+            gridState = _gridGenerator.GenerateObjectAtTopOfGrid(gridPosition.x);
+        else if (verticalPosition == -1)
+            gridState = _gridGenerator.GenerateObjectAtBottomOfGrid();
+
+        GameObject gridGameObject = Instantiate(_templates.First(template => template.StateInGrid == gridState).GameObjectTemplate, TranslateGridToWorldPosition(gridPosition), Quaternion.identity);
+        _queueWithGameObjectsToDelete.Enqueue(gridGameObject);
     }
 
     private Vector2 TranslateGridToWorldPosition(Vector2Int gridPosition)

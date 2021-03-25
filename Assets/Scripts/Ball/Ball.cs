@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
     private int _score;
+    private const string NameOfScene = "MainMenu";
 
     public event UnityAction<int> ScoreChanged;
 
@@ -18,6 +17,6 @@ public class Ball : MonoBehaviour
 
     public void Die()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(NameOfScene);
     }
 }

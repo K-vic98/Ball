@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BallMovement : MonoBehaviour
@@ -14,7 +12,7 @@ public class BallMovement : MonoBehaviour
 
     private void Start()
     {
-        _rigidbody = gameObject.GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -25,9 +23,7 @@ public class BallMovement : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && CheckLandAvailability())
-        {
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode.Impulse);
-        }
     }
 
     private bool CheckLandAvailability()

@@ -284,10 +284,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853ba7967f5ba9e49a32ce112786c67c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _comparisonWithResultOfBarrierPerlinNoise: 0.5
-  _comparisonWithResultOfSin: 0.9
-  _sinWaveWidth: 2
-  _comparisonWithResultOfCoinPerlinNoise: 0.5
+  _barrierRandomizationRate: 0.5
+  _barrierLimitingFactor: 2
+  _coinRandomizationRate: 0.5
 --- !u!4 &718305541
 Transform:
   m_ObjectHideFlags: 0

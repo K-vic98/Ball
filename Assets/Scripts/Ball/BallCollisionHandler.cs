@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Ball))]
 public class BallCollisionHandler : MonoBehaviour
@@ -15,13 +13,9 @@ public class BallCollisionHandler : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Coin>(out Coin coin))
-        {
             _ball.IncreaseScore();
-        }
 
         if (other.TryGetComponent<Barrier>(out Barrier barrier))
-        {
             _ball.Die();
-        }
     }
 }

@@ -1,22 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GridGenerator : MonoBehaviour
 {
     [Header("BarrierPerlinNoise")]
-    [SerializeField] private float _comparisonWithResultOfBarrierPerlinNoise;
-    [Header("Sin")]
-    [SerializeField] private float _comparisonWithResultOfSin;
-    [SerializeField] private float _sinWaveWidth;
+    [SerializeField] private float _barrierRandomizationRate;
+    [Header("BarrierSin")]
+    [SerializeField] private float _barrierLimitingFactor;
     [Header("CoinrPerlinNoise")]
-    [SerializeField] private float _comparisonWithResultOfCoinPerlinNoise;
+    [SerializeField] private float _coinRandomizationRate;
     
-    public StateInGrid GenerateStateAtTopOfGrid(int x)
+    public StateInGrid GenerateObjectAtTopOfGrid(int onGroundPositionX)
     {
-        int resultOfPerlinNoise = Mathf.PerlinNoise((float)x, 0.9f) > _comparisonWithResultOfBarrierPerlinNoise ? 1 : 0;
-        int resultOfSin = Mathf.Abs(Mathf.Sin(_sinWaveWidth * x)) > _comparisonWithResultOfSin ? 1 : 0;
-        int possibilityToPutBarrier = resultOfPerlinNoise * resultOfSin;
-        return possibilityToPutBarrier == 1 ? StateInGrid.Barrier : Mathf.PerlinNoise((float)x, 0.9f) > _comparisonWithResultOfCoinPerlinNoise ? StateInGrid.Coin : StateInGrid.Nothing;
+        bool randomBarrier = ReturnRandomBarrier(onGroundPositionX);
+        bool constrainToPlaceBarrier = ReturnConstrainToPlaceBarrier(onGroundPositionX);
+        bool possibilityToPlaceBarrier = ReturnPossibilityToPlaceBarrier(randomBarrier, constrainToPlaceBarrier);
+        StateInGrid objectAtTopOfGrid = possibilityToPlaceBarrier == true ? StateInGrid.Barrier : ReturnCoinOrNothing(onGroundPositionX);
+        return objectAtTopOfGrid;
+    }
+
+    public StateInGrid GenerateObjectAtBottomOfGrid()
+    {
+        return StateInGrid.Ground;
+    }
+
+    private bool ReturnRandomBarrier(int onGroundPositionX)
+    {
+        return Mathf.PerlinNoise((float)onGroundPositionX, 0.9f) > _barrierRandomizationRate ? true : false;
+    }
+
+    private bool ReturnConstrainToPlaceBarrier(int onGroundPositionX)
+    {
+        return Mathf.Abs(Mathf.Sin(_barrierLimitingFactor * onGroundPositionX)) > 0.9 ? true : false;
+    }
+    
+    private bool ReturnPossibilityToPlaceBarrier(bool randomObstacle, bool placeWhereObstacleCanStand)
+    {
+        return randomObstacle && placeWhereObstacleCanStand ? true : false;
+    }
+
+    private StateInGrid ReturnCoinOrNothing(int onGroundPositionX)
+    {
+        return Mathf.PerlinNoise((float)onGroundPositionX, 0.9f) > _coinRandomizationRate ? StateInGrid.Coin : StateInGrid.Nothing;
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CreatorsPanel : MonoBehaviour
 {
@@ -13,6 +11,6 @@ public class CreatorsPanel : MonoBehaviour
 
     public void ClosePanel()
     {
-        _animator.SetBool("isOpen", false);
+        _animator.SetBool(AnimatorCreatorsPanel.Params.IsOpen, false);
     }
 }
