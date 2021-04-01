@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class Ball : MonoBehaviour
 {
     private int _score;
-    private const string NameOfScene = "MainMenu";
+    private const string NameOfMenuScene = "MainMenu";
 
     public event UnityAction<int> ScoreChanged;
 
@@ -17,6 +17,6 @@ public class Ball : MonoBehaviour
 
     public void Die()
     {
-        SceneManager.LoadScene(NameOfScene);
+        SceneManager.LoadScene(NameOfMenuScene);
     }
 }

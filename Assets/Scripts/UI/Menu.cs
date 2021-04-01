@@ -5,11 +5,11 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] Animator _creatorsPanel;
 
-    private const string NameOfScene = "Game";
+    private const string NameOfGameScene = "Game";
 
     public void StartGame()
     {
-        SceneManager.LoadScene(NameOfScene);
+        SceneManager.LoadScene(NameOfGameScene);
     }
 
     public void ExitGame()
